@@ -5,16 +5,28 @@ let output = document.getElementById('output');
 conButton.addEventListener('click', function () {
   let inputText = document.getElementById('inputText');
   let word = inputText.value;
+  let pattern = /[a-z]/g;
+  let pattern2 = /[A-Z]/g;
+  let res = word.match(pattern);
+  let res2 = word.match(pattern2);
+
+  if (res === null) {
+    res = [];
+  }
+  if (res2 === null) {
+    res2 = [];
+  }
   let newWord = '';
-  for (let i of word) {
-    let asciiVal = i.charCodeAt();
-    if (asciiVal >= 65 && asciiVal <= 90) {
-      let small = i.toLowerCase();
-      newWord = newWord.concat(small);
+  for (let w of word) {
+    if (res.includes(w)) {
+      newWord = newWord.concat(w.toUpperCase());
+    } else if (res2.includes(w)) {
+      newWord = newWord.concat(w.toLowerCase());
     } else {
-      let caps = i.toUpperCase();
-      newWord = newWord.concat(caps);
+      newWord = newWord.concat(w);
     }
   }
   output.innerHTML = newWord;
 });
+
+// });
